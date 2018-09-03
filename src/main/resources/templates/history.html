@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+<meta charset="UTF-8" />
+<title>彩票开奖历史</title>
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.5.5.2/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.5.5.2/themes/icon.css" />
+<script type="text/javascript"
+	src="/jquery-easyui-1.5.5.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/jquery-easyui-1.5.5.2/jquery.easyui.min.js"></script>
+</head>
+
+<body>
+
+	<span><font size="7"><b>开奖历史</b></font></span>
+	<div style="float: right;">
+		<a href="/order/index">进入会员游戏中心</a>
+	</div>
+
+	<table class="easyui-datagrid" title="" style="width: 1200px;height:700px"
+		data-options="singleSelect:true,collapsible:true,url:'/qxc/history',method:'get'">
+		<thead>
+			<tr>
+				<th data-options="field:'preDrawTime',width:300">开奖时间</th>
+				<th data-options="field:'preDrawIssue',width:300">开奖期数</th>
+				<th data-options="field:'preDrawCode',width:300">中奖号码</th>
+				<th data-options="field:'draw_time',width:300">下期时间</th>
+			</tr>
+		</thead>
+	</table>
+
+</body>
+
+</html>

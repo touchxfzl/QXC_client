@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>hello</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+
+	<p th:text="'Hello！, ' + ${user.age} + '!'">3333</p>
+	<p th:with="isEven=(${user.age} % 2 == 0)">3333</p>
+
+	<!-- <a th:href="@{/login}" th:unless=${session.user!=null}>Login</a> -->
+
+	<div th:switch="${user.role}">
+		<p th:case="'admin'">User is an administrator</p>
+		<p th:case="#{roles.manager}">User is a manager</p>
+	</div>
+</body>
+</html>

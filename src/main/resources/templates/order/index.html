@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>游戏中心</title>
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.5.5.2/themes/default/easyui.css" />
+<link rel="stylesheet" type="text/css"
+	href="/jquery-easyui-1.5.5.2/themes/icon.css" />
+<script type="text/javascript"
+	src="/jquery-easyui-1.5.5.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="/jquery-easyui-1.5.5.2/jquery.easyui.min.js"></script>
+
+</head>
+
+<body class="easyui-layout">
+	<div data-options="region:'north',border:false"
+		style="height: 50px; background: #B3DFDA; padding: 10px">
+
+		<table>
+			<tr>
+				<div
+					style="border: solid 0px; width: 150px; height: 50px; float: left;">
+					<b><font size="6" color="red" face="微软雅黑">七星彩</font></b>
+				</div>
+				<div
+					style="border: solid 0px; width: 150px; height: 50px; float: left;">
+					<font size="4" color="red">本期开奖号码：<span id="lotteryNums"></span></font>
+				</div>
+				<div
+					style="border: solid 0px; width: 150px; height: 50px; float: left;">
+					<font size="4"> <a href="/lottery/history">开奖历史</a>
+					</font>
+				</div>
+				<div
+					style="border: solid 0px; width: 150px; height: 50px; float: left;">
+					<font size="4">游戏规则</font>
+				</div>
+				<div
+					style="border: solid 0px; width: 150px; height: 50px; float: left;">
+					<font size="4"> <a href="/order/showOrders">订单信息</a>
+					</font>
+				</div>
+
+				<div
+					style="border: solid 0px; width: 150px; height: 50px; float: left;">
+					<font size="4">退出</font>
+				</div>
+			</tr>
+		</table>
+	</div>
+	<div data-options="region:'west',split:true,title:'   '"
+		style="width: 230px; padding: 10px;">
+		<div id="p" class="easyui-panel" title="账号信息"
+			style="width: 200px; height: 500px; padding: 10px;">
+			<p style="font-size: 14px">
+				账号：<span id="account"></span>
+			</p>
+			<p style="font-size: 14px">
+				金额：<span id="money"></span>
+			</p>
+			<script type="text/javascript">
+				$(function() {
+					$.get("/user/user", function(user) {
+						$("#account").html(user.name);
+						$("#money").html(user.umoney);
+					});
+				})
+			</script>
+			<input style="background-color: darkgoldenrod; width: 150px;"
+				type="button" value="注册/登录" /><br /> <br />
+			<div>最新注单:</div>
+			<input
+				style="background-color: aquamarine; width: 150px; height: 300px;"
+				type="button" />
+
+		</div>
+	</div>
+	<div
+		data-options="region:'east',split:true,collapsed:true,title:'East'"
+		style="width: 100px; padding: 10px;">east region</div>
+	<div data-options="region:'south',border:false"
+		style="height: 50px; background: #A9FACD; padding: 10px;">south
+		region</div>
+	<div data-options="region:'center',title:'   '">
+		<div style="width: 300px; float: left;">香港彩</div>
+		<div style="width: 300px; float: left;">第180期</div>
+		<div style="width: 300px; float: left;">
+			距离封盘<input type="button" value="0:35:35" />
+		</div>
+		<div style="width: 300px; float: left;">
+			距离开奖<input type="button" value="0:35:35" />
+		</div>
+		<div style="margin: 20px 0 10px 0;"></div>
+		<div class="easyui-tabs" style="width: 1500px; height: 750px">
+			<div title="二字定" style="padding: 10px">
+				<h2>玩法介绍</h2>
+				<p>
+				<h4>
+					<font color="red">请输入1以上的整数，小数将四舍五入处理,最大数量不能超过1000，大于1000按1000处理</font>
+				</h4>
+				</p>
+				<div style="margin: 20px 0;"></div>
+				<div class="easyui-panel" title="投注" style="width: 1400px">
+					<div style="padding: 10px 20px 20px 20px">
+						<form id="ff" method="post">
+							<table cellpadding="5">
+								<tr>
+									<td>0XX0&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>0XX1&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>0XX2&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>0XX3&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>0XX4&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>0XX5&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>0XX6&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>0XX7&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>0XX8&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>0XX9&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+								</tr>
+
+								<tr>
+									<td>1XX0&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>1XX1&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>1XX2&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>1XX3&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>1XX4&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>1XX5&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>1XX6&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>1XX7&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>1XX8&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>1XX9&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+								</tr>
+								<tr>
+									<td>2XX0&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>2XX1&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>2XX2&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>2XX3&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>2XX4&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>2XX5&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>2XX6&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>2XX7&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>2XX8&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>2XX9&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+								</tr>
+								<tr>
+									<td>3XX0&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>3XX1&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>3XX2&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>3XX3&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>3XX4&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>3XX5&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>3XX6&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>3XX7&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>3XX8&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>3XX9&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+								</tr>
+								<tr>
+									<td>4XX0&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>4XX1&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>4XX2&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>4XX3&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>4XX4&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>4XX5&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>4XX6&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>4XX7&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>4XX8&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>4XX9&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+								</tr>
+								<tr>
+									<td>5XX0&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>5XX1&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>5XX2&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>5XX3&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>5XX4&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>5XX5&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>5XX6&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>5XX7&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>5XX8&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>5XX9&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+								</tr>
+								<tr>
+									<td>6XX0&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>6XX1&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>6XX2&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>6XX3&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>6XX4&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>6XX5&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>6XX6&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>6XX7&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>6XX8&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>6XX9&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+								</tr>
+								<tr>
+									<td>7XX0&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>7XX1&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>7XX2&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>7XX3&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>7XX4&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>7XX5&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>7XX6&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>7XX7&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>7XX8&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>7XX9&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+								</tr>
+								<tr>
+									<td>8XX0&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>8XX1&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>8XX2&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>8XX3&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>8XX4&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>8XX5&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>8XX6&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>8XX7&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>8XX8&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>8XX9&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+								</tr>
+								<tr>
+									<td>9XX0&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>9XX1&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>9XX2&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>9XX3&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>9XX4&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>9XX5&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>9XX6&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>9XX7&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>9XX8&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+									<td>9XX9&nbsp; <font color="red">90倍</font>
+									</td>
+									<td><input style="width: 30px;" class="easyui-numberbox"
+										type="text" name="ezds" min="0" max="10000" precision="0"
+										data-options="required:true" value="0"></input></td>
+
+								</tr>
+							</table>
+						</form>
+						<div style="text-align: center; padding: 5px">
+							<a href="javascript:void(0)" class="easyui-linkbutton"
+								onclick="submitForm()">提交</a> <a href="javascript:void(0)"
+								class="easyui-linkbutton" onclick="clearForm()">清空</a>
+						</div>
+					</div>
+				</div>
+				<script>
+					function submitForm() {
+						$('#ff').form('submit', {
+							url : '/order/orderSubmint',
+							success : function(data) {
+								//alert(str.length)
+								if (data == -1) {
+									alert("余额不足")
+
+								} else {
+									alert("下单成功")
+									$.get("/user/user", function(user) {
+										$("#account").html(user.name);
+										$("#money").html(user.umoney);
+									});
+									$('#win').window('open');
+								}
+							}
+						});
+					}
+
+					function clearForm() {
+						$('#ff').form('clear');
+					}
+				</script>
+
+				<!--下注表格提交后弹出提示框-->
+				<div id="win" class="easyui-window" title="成功下单" closed="true"
+					style="width: 300px; height: 100px;">
+					<form style="padding: 10px 20px 10px 40px;">
+						<div style="padding: 5px; text-align: center;">
+							<a href="/order/showOrders" class="easyui-linkbutton"
+								icon="icon-ok">查看订单</a> <a href="#" class="easyui-linkbutton"
+								icon="icon-cancel" onclick="cancelOrder()">关闭窗口</a>
+							<script type="text/javascript">
+								function cancelOrder() {
+									$('#win').window('close');
+								}
+							</script>
+						</div>
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>
